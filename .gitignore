@@ -1,0 +1,6 @@
+#json files
+package-lock.json
+credentials.json
+
+#node_modules
+node_modules
