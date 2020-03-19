@@ -114,4 +114,18 @@ describe('Lottery Contract', () => {
         const balance = await web3.eth.getBalance(lottery.options.address);
         assert.equal(0, balance);
     });
+
+    it('winning address is set after selecting winner', async() => {
+        await lottery.methods.enter().send({
+            from: accounts[0],
+            value: web3.utils.toWei('2', 'ether')
+        });
+        await lottery.methods.pickWinner().send({
+            from: accounts[0]
+        });
+        const winner = await lottery.methods.lastWinner().call({
+            from: accounts[0]
+        });
+        assert.equal(winner, accounts[0]);
+    });
 })
